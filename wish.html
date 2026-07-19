@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+overflow:hidden;
+
+}
+
+/* กระดาษ */
+
+.paper{
+
+width:550px;
+
+min-height:700px;
+
+background:#fff;
+
+border-radius:15px;
+
+padding:40px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.paper:before{
+
+content:"";
+
+position:absolute;
+
+left:35px;
+top:0;
+
+width:2px;
+height:100%;
+
+background:#d8ecff;
+
+}
+
+h1{
+
+text-align:center;
+
+color:#6b89a4;
+
+margin-bottom:20px;
+
+}
+
+.text{
+
+font-size:18px;
+
+line-height:2;
+
+color:#666;
+
+margin-bottom:30px;
+
+padding-left:20px;
+
+}
+
+/* เค้ก */
+
+.cake{
+
+font-size:120px;
+
+text-align:center;
+
+margin:20px 0;
+
+animation:float 3s infinite ease-in-out;
+
+}
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+/* ปุ่ม */
+
+button{
+
+display:block;
+
+margin:20px auto;
+
+padding:14px 40px;
+
+border:none;
+
+border-radius:30px;
+
+background:#8fd0ff;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+/* กล่องคำอวยพร */
+
+
+.wish{
+
+position:absolute;
+
+left:50%;
+bottom:-600px;
+
+transform:translateX(-50%);
+
+width:90%;
+
+height:420px;
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+transition:1s;
+
+text-align:center;
+
+overflow-y:auto;
+
+}
+
+.wish.show{
+
+bottom:120px;
+
+}
+
+.wish h2{
+
+color:#6b89a4;
+
+margin-bottom:15px;
+
+}
+
+.wish p{
+
+line-height:2;
+
+color:#666;
+
+}
+
+.next{
+
+display:none;
+
+margin-top:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="paper">
+
+<h1>จดหมายฉบับที่ 1</h1>
+
+<div class="text">
+
+to singhaa<br><br>
+
+วันนี้เป็นวันพิเศษ ที่แกอัพเวลเป็น 18 แล้ว<br>
+ชั้นเลยมีเค้กมาให้แกด้วย ลองอธิฐานดู ขออะไรก็เป็นจริงทุกอย่างก้อนนี้
+
+</div>
+
+<div class="cake">
+
+🎂
+
+</div>
+
+<button onclick="showWish()">
+
+เปิดคำอวยพร
+
+</button>
+
+<div class="wish" id="wish">
+
+<h2>Suk san wan koet.</h2>
+
+<p>
+24/08/08<br>
+วันนี้เป็นวันพิเศษมากกก เพราะว่าเป็นวันที่แฟนเค้าลืมตาขึ้นมามองดูโลก ผ่านไปแปบเดียวจาก2008ก็กลายเป็น2026 วนมาปีนี้ครบรอบ 18 ขวบแล้ว
+ขอบคุณที่เกิดมานะ แกเก่งมากๆ ชั้นมีคำอวยพรมาให้แกเยอะแยะเลยล่ะวันนี้ั แล้วก็ชั้นมีของขวัญให้แกด้วย ไมรู้ว่าแกจะดีใจรึป่าว แตต่ว่าชั้นตั้งใจทำมากๆเลยน่ะ
+เต็มที่ได้เป็นแบบนั้นน่ะ มาอ่านคำอวยพรที่ชั้นอยากมอบให้แกดีกว่า วันเกิดแกปีนี้ชั้นขอให้เป็นการเริ่มต้นอายุ18ที่ดีของแก มีความสุขเย้อๆ ยิ้มมากๆ มีรอยยิ้มบนหน้าทู้กกวันเลย
+แล้วก็อย่าลืมหัวเราะด้วย ในทุกวันของแกขอให้เจอแต่เรื่องดีๆเข้ามา มีแต่เรื่องที่ทำให้ยิ้มได้ พบเจอแต่คนที่ดี จริงใจกับแก ใจดีกับแก ให้แกมีสุขภาพร่างกายที่แข็งแรง
+ไม่เจ็บไม่ป่วย อยู่ดีกินดี ได้กินแต่ของอร่อยๆ มีของอร่อยให้กินทุกวัน อายุมั่นขวัญยืน แล้วก็ขอให้ทุกสิ่งที่แกกำลังคาดหวังหรือตั้งใจที่จะทำอะไร ไม่ว่าจะเป็นเรื่อง เรียน งานหรืออะไรต่างๆประสบความสำเร็จตรงตามที่หวังไว้
+แต่ถ้าเจอกับอะไร เหนื่อยตรงไหน ไม่สบายใจยังไง เราอยู่ตรงนี้นะนาย หันมาหากันได้ ไม่ได้อยู่ข้างหลังแต่อยู่ข้างๆ มีเรื่องอยากขอบคุณแกด้วย ก็ขอบคุณในทุกเรื่องเลยน่ะ ชั้นดีใจนะที่มีแกในทุกทุกวัน 
+เหมือนแกเข้ามาเติมสีในชีวิตให้มีสีสันขั้นจากเดิม เก่งมากนายสิงหา <br>
+น้ำรักสิงหาที่สุดในสามโลก ไอเลิฟยูสิงหาเพชรไทรงาม
+</p>
+
+<button class="next" id="nextBtn"
+onclick="window.location.href='sing.html'">
+
+จดหมายฉบับถัดไป →
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function showWish(){
+
+    // แสดงคำอวยพร
+    document.getElementById("wish").classList.add("show");
+
+    // แสดงปุ่มหน้าถัดไป
+    document.getElementById("nextBtn").style.display="block";
+
+    // เล่นเพลง
+    const music = document.getElementById("bgMusic");
+    music.play();
+
+}
+
+</script>
+<audio id="bgMusic">
+    <source src="toey.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+function showWish(){
+
+    document.getElementById("wish").classList.add("show");
+    document.getElementById("nextBtn").style.display="block";
+
+    music.currentTime = 105;
+    music.play();
+
+}
+
+music.addEventListener("timeupdate",()=>{
+
+    if(music.currentTime>=150){
+
+        music.currentTime=105;
+        music.play();
+
+    }
+
+});    
+</script>
+</body>
+</html>

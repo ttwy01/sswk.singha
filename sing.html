@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+.clovers{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+.clovers span{
+    position:absolute;
+    top:-80px;
+    color:#8BC34A;
+    font-size:22px;
+    text-shadow:0 0 8px rgba(139,195,74,.4);
+    animation:cloverFall 8s linear infinite;
+    user-select:none;
+}
+
+@keyframes cloverFall{
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        transform:translateY(50vh) translateX(20px) rotate(180deg);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-25px) rotate(360deg);
+        opacity:0;
+    }
+}
+.clovers span:nth-child(1){left:6%; animation-delay:0s;}
+.clovers span:nth-child(2){left:18%; animation-delay:2s;}
+.clovers span:nth-child(3){left:35%; animation-delay:4s;}
+.clovers span:nth-child(4){left:52%; animation-delay:1s;}
+.clovers span:nth-child(5){left:70%; animation-delay:5s;}
+.clovers span:nth-child(6){left:88%; animation-delay:3s;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+overflow:hidden;
+
+}
+
+.paper{
+
+width:560px;
+
+background:white;
+
+padding:45px;
+
+border-radius:18px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+position:relative;
+
+text-align:center;
+
+}
+
+.paper::before{
+
+content:"";
+
+position:absolute;
+
+left:35px;
+
+top:0;
+
+width:2px;
+
+height:100%;
+
+background:#d8ecff;
+
+}
+
+h1{
+
+color:#ff6fae;
+
+margin-bottom:10px;
+
+font-size:38px;
+
+}
+
+p{
+
+color:#777;
+
+margin-bottom:40px;
+
+font-size:20px;
+
+}
+
+.button-area{
+
+position:relative;
+
+height:120px;
+
+}
+
+button{
+
+width:150px;
+
+height:55px;
+
+border:none;
+
+border-radius:40px;
+
+font-size:20px;
+
+cursor:pointer;
+
+color:white;
+
+transition:.25s;
+
+}
+
+#love{
+
+position:absolute;
+
+left:80px;
+
+top:20px;
+
+background:#ff8fc5;
+
+}
+
+#notlove{
+
+position:absolute;
+
+right:80px;
+
+top:20px;
+
+background:#8fd3ff;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+#message{
+
+margin-top:30px;
+
+font-size:18px;
+
+color:#5b7d95;
+
+min-height:40px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="paper">
+
+<h1>auan rak kao mai.</h1>
+
+<p>เลือกคำตอบ</p>
+
+<div class="button-area">
+
+<button id="love">
+rak❤️
+</button>
+
+<button id="notlove">
+ไม่rak💙
+</button>
+
+</div>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+
+const love=document.getElementById("love");
+const notlove=document.getElementById("notlove");
+const msg=document.getElementById("message");
+
+let unlocked=false;
+let wrongCount=0;
+
+// ปุ่มรักวิ่งหนี
+love.addEventListener("mouseenter",()=>{
+
+if(unlocked) return;
+
+let x=Math.random()*(window.innerWidth-180);
+let y=Math.random()*(window.innerHeight-100);
+
+love.style.left=x+"px";
+love.style.top=y+"px";
+
+});
+
+// กดไม่รัก
+notlove.onclick=function(){
+
+wrongCount++;
+
+if(wrongCount<2){
+
+msg.innerHTML="ไม่รักจริงหรอ";
+
+}else{
+
+msg.innerHTML="ไม่แกล้งแล้ว รักมั้ยยย";
+
+unlocked=true;
+
+love.style.position="relative";
+love.style.left="0";
+love.style.top="0";
+
+document.querySelector(".button-area").appendChild(love);
+
+}
+
+}
+
+// กดรัก
+love.onclick=function(){
+
+if(!unlocked){
+
+msg.innerHTML="😂 จับให้ได้ก่อนสิ";
+
+return;
+
+}
+
+window.location.href="ter.html";
+
+}
+function createLetter(){
+    const letter = document.createElement("div");
+    letter.className = "bow"; // ใช้ CSS เดิมได้
+
+    const letters = ["🍀"];
+    letter.innerHTML = letters[Math.floor(Math.random() * letters.length)];
+
+    letter.style.left = Math.random() * window.innerWidth + "px";
+    letter.style.fontSize = (28 + Math.random() * 18) + "px";
+    letter.style.animationDuration = (6 + Math.random() * 4) + "s";
+
+    document.getElementById("bows").appendChild(letter);
+
+    setTimeout(() => {
+        letter.remove();
+    }, 10000);
+}
+
+setInterval(createLetter, 500);
+</script>
+<div class="clovers">
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+</body>
+</html>

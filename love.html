@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+.clovers{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+.clovers span{
+    position:absolute;
+    top:-80px;
+    color:#8BC34A;
+    font-size:22px;
+    text-shadow:0 0 8px rgba(139,195,74,.4);
+    animation:cloverFall 8s linear infinite;
+    user-select:none;
+}
+
+@keyframes cloverFall{
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        transform:translateY(50vh) translateX(20px) rotate(180deg);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-25px) rotate(360deg);
+        opacity:0;
+    }
+}
+.clovers span:nth-child(1){left:6%; animation-delay:0s;}
+.clovers span:nth-child(2){left:18%; animation-delay:2s;}
+.clovers span:nth-child(3){left:35%; animation-delay:4s;}
+.clovers span:nth-child(4){left:52%; animation-delay:1s;}
+.clovers span:nth-child(5){left:70%; animation-delay:5s;}
+.clovers span:nth-child(6){left:88%; animation-delay:3s;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+overflow:hidden;
+
+}
+
+/* กระดาษ */
+
+.paper{
+
+width:720px;
+
+padding:45px;
+
+background:#fff;
+
+border-radius:18px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+text-align:center;
+
+position:relative;
+
+}
+
+.paper::before{
+
+content:"";
+
+position:absolute;
+
+left:35px;
+top:0;
+
+width:2px;
+height:100%;
+
+background:#dbeeff;
+
+}
+
+h1{
+
+color:#6f8fa9;
+
+margin-bottom:10px;
+
+}
+
+p{
+
+color:#777;
+
+margin-bottom:35px;
+
+}
+
+/* กล่องของขวัญ */
+
+.gift{
+
+position:relative;
+
+width:180px;
+height:150px;
+
+margin:auto;
+
+cursor:pointer;
+
+transition:.4s;
+
+}
+
+.gift:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ตัวกล่อง */
+
+.box{
+
+position:absolute;
+
+bottom:0;
+
+width:180px;
+height:110px;
+
+background:linear-gradient(#ffe5ee,#ffcfe2);
+
+border-radius:0 0 10px 10px;
+
+}
+
+/* ฝา */
+
+.lid{
+
+position:absolute;
+
+top:0;
+
+width:190px;
+height:45px;
+
+left:-5px;
+
+background:linear-gradient(#ffd4e8,#ffbfd9);
+
+border-radius:8px;
+
+transform-origin:left bottom;
+
+transition:1s;
+
+z-index:5;
+
+}
+
+/* ริบบิ้น */
+
+.ribbon-v{
+
+position:absolute;
+
+left:82px;
+
+width:16px;
+height:150px;
+
+background:#8fd3ff;
+
+z-index:2;
+
+}
+
+.ribbon-h{
+
+position:absolute;
+
+top:15px;
+
+width:190px;
+height:14px;
+
+left:-5px;
+
+background:#8fd3ff;
+
+z-index:6;
+
+}
+
+/* โบว์ */
+
+.bow{
+
+position:absolute;
+
+top:-18px;
+left:58px;
+
+font-size:42px;
+
+z-index:8;
+
+}
+
+/* วิดีโอ */
+
+.videoBox{
+
+display:none;
+
+margin-top:40px;
+
+animation:show .8s;
+
+}
+
+.videoBox video{
+
+width:100%;
+
+max-width:560px;
+
+border-radius:15px;
+
+box-shadow:0 15px 30px rgba(0,0,0,.2);
+
+}
+
+@keyframes show{
+
+from{
+
+opacity:0;
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.next{
+
+display:none;
+
+margin-top:30px;
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:40px;
+
+background:#8fd3ff;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.next:hover{
+
+transform:scale(1.05);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="paper">
+
+<h1>จดหมายฉบับที่ 3</h1>
+
+<p>มีกล่องของขวัญมาให้</p>
+
+<div class="gift" onclick="openGift()">
+
+<div class="lid" id="lid"></div>
+
+<div class="box"></div>
+
+<div class="ribbon-v"></div>
+
+<div class="ribbon-h"></div>
+
+<div class="bow">🎀</div>
+
+</div>
+
+<div class="videoBox" id="videoBox">
+
+<video id="video" controls>
+
+<source src="01.mp4" type="video/mp4">
+
+</video>
+
+<br>
+
+<button class="next" id="nextBtn"
+onclick="window.location.href='next.html'">
+
+จดหมายฉบับสุดท้าย 💌
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function openGift(){
+
+document.getElementById("lid").style.transform="rotate(-120deg)";
+
+setTimeout(function(){
+
+document.getElementById("videoBox").style.display="block";
+
+const video=document.getElementById("video");
+
+video.play();
+
+document.getElementById("nextBtn").style.display="inline-block";
+
+},800);
+
+}
+
+</script>
+<div class="clovers">
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+</div>
+</body>
+</html>

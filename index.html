@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+
+body{
+    margin:0;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;   /* กึ่งกลางแนวนอน */
+    align-items:center;       /* กึ่งกลางแนวตั้ง */
+    flex-direction:column;
+
+    background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+    position:relative;
+}
+
+/*---------------------*/
+
+.message-top{
+
+position:absolute;
+top:45px;
+
+text-align:center;
+
+animation:updown 2s infinite;
+
+}
+
+.message-top h2{
+
+color:#5b7d95;
+font-weight:500;
+
+}
+
+.message-top p{
+
+color:#7ca3bb;
+
+font-size:18px;
+
+}
+
+.arrow{
+
+font-size:40px;
+margin-top:10px;
+
+animation:bounce 1s infinite;
+
+}
+
+/*---------------------*/
+
+.container{
+
+position:relative;
+
+cursor:pointer;
+
+}
+
+/*---------------------*/
+
+.envelope{
+
+position:relative;
+
+width:420px;
+height:270px;
+
+background:#fffdfc;
+
+border-radius:8px;
+
+box-shadow:
+
+0 20px 40px rgba(0,0,0,.18),
+
+inset 0 2px 3px rgba(255,255,255,.8);
+
+overflow:hidden;
+
+transition:1s;
+
+}
+
+
+/* ฝาซอง */
+
+.flap{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+clip-path:polygon(0 0,50% 52%,100% 0);
+
+background:linear-gradient(#ffffff,#edf5ff);
+
+transform-origin:top;
+
+transition:1.2s;
+
+z-index:6;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+/* สามเหลี่ยมล่าง */
+
+.bottom{
+
+position:absolute;
+
+bottom:0;
+
+width:100%;
+height:100%;
+
+clip-path:polygon(0 100%,50% 45%,100% 100%);
+
+background:#f8fcff;
+
+z-index:4;
+
+}
+
+/* ด้านซ้าย */
+
+.left{
+
+position:absolute;
+
+left:0;
+
+width:100%;
+height:100%;
+
+clip-path:polygon(0 0,50% 52%,0 100%);
+
+background:#f2f8ff;
+
+z-index:3;
+
+}
+
+/* ด้านขวา */
+
+.right{
+
+position:absolute;
+
+right:0;
+
+width:100%;
+height:100%;
+
+clip-path:polygon(100% 0,50% 52%,100% 100%);
+
+background:#eef7ff;
+
+z-index:3;
+
+}
+ 
+.container{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:420px;
+    height:270px;
+
+    cursor:pointer;
+    z-index:10;
+}
+
+/*---------------------*/
+
+.letter{
+
+position:absolute;
+
+left:50%;
+transform:translateX(-50%);
+
+bottom:15px;
+
+width:360px;
+height:220px;
+
+background:white;
+
+border-radius:12px;
+
+box-shadow:
+
+0 10px 20px rgba(0,0,0,.12);
+
+padding:30px;
+
+text-align:center;
+
+z-index:2;
+
+transition:1.3s;
+
+}
+
+
+
+.letter{
+    position:absolute;
+    left:50%;
+    bottom:15px;
+    transform:translateX(-50%);
+
+    width:min(360px,90vw);
+    height:min(500px,70vh);   /* ไม่สูงเกิน 70% ของหน้าจอ */
+
+    background:#fff;
+    border-radius:12px;
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    overflow-y:auto;          /* ถ้าข้อความยาวให้เลื่อนในกระดาษ */
+    z-index:2;
+
+    transition:1.5s ease;
+}
+.open .flap{
+
+transform:rotateX(180deg);
+
+}
+
+.open .letter{
+    top:50%;
+    bottom:auto;
+    transform:translate(-50%,-50%);
+    z-index:30;
+}
+
+.open .envelope{
+    overflow:visible;
+}
+
+/*---------------------*/
+/* ==========================
+   Floating Clover
+========================== */
+
+.clovers{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+
+.clovers span{
+    position:absolute;
+    top:-80px;
+    color:#8BC34A;
+    font-size:22px;
+    text-shadow:
+        0 0 8px rgba(139,195,74,.4);
+    animation:cloverFall linear infinite;
+    user-select:none;
+}
+
+.clovers span:nth-child(1){left:6%; animation-duration:8s; animation-delay:0s; font-size:18px;}
+.clovers span:nth-child(2){left:18%; animation-duration:10s; animation-delay:2s; font-size:24px;}
+.clovers span:nth-child(3){left:35%; animation-duration:9s; animation-delay:4s; font-size:20px;}
+.clovers span:nth-child(4){left:52%; animation-duration:11s; animation-delay:1s; font-size:26px;}
+.clovers span:nth-child(5){left:70%; animation-duration:8.5s; animation-delay:5s; font-size:18px;}
+.clovers span:nth-child(6){left:88%; animation-duration:10s; animation-delay:3s; font-size:22px;}
+
+@keyframes cloverFall{
+
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        transform:
+            translateY(50vh)
+            translateX(20px)
+            rotate(180deg);
+    }
+
+    100%{
+        transform:
+            translateY(110vh)
+            translateX(-25px)
+            rotate(360deg);
+        opacity:0;
+    }
+
+}
+
+.bubble{
+
+position:absolute;
+
+bottom:-80px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.35);
+
+backdrop-filter:blur(4px);
+
+border:1px solid rgba(255,255,255,.8);
+
+animation:float linear infinite;
+
+}
+
+/*---------------------*/
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0) scale(.7);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:.7;
+
+}
+
+100%{
+
+transform:translateY(-120vh) scale(1.2);
+
+opacity:0;
+
+}
+
+}
+
+@keyframes bounce{
+
+50%{
+
+transform:translateY(8px);
+
+}
+
+}
+
+@keyframes updown{
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+}
+
+.fade{
+
+animation:fade .8s forwards;
+
+}
+
+@keyframes fade{
+
+to{
+
+opacity:0;
+
+transform:scale(.95);
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+     <div class="clovers">
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+</div>
+
+<div class="message-top">
+
+<h2>💌 to singha</h2>
+
+<p>มีซองจดหมายมาส่ง</p>
+
+<div class="arrow">⬇</div>
+
+</div>
+
+<div class="container" id="box">
+
+<div class="envelope">
+
+<div class="letter">
+
+<h1>24/08/08</h1>
+
+<p>
+
+Suk san wan koet.
+
+<br><br>
+
+ยินดีต้อนรับเข้าสู่ภายในจดหมาย.
+
+</p>
+
+</div>
+
+<div class="flap"></div>
+
+<div class="left"></div>
+
+<div class="right"></div>
+
+<div class="bottom"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const box = document.getElementById("box");
+
+box.onclick = function(){
+
+    box.classList.add("open");
+
+
+    setTimeout(()=>{
+
+        document.body.classList.add("fade");
+
+    },3500);
+
+
+    setTimeout(()=>{
+
+        window.location.href="password.html";
+
+    },4500);
+
+}
+
+
+/* ฟองสบู่ */
+
+for(let i=0;i<28;i++){
+
+let b=document.createElement("div");
+
+b.className="bubble";
+
+let s=Math.random()*50+18;
+
+b.style.width=s+"px";
+
+b.style.height=s+"px";
+
+b.style.left=Math.random()*100+"%";
+
+b.style.animationDuration=(Math.random()*8+8)+"s";
+
+b.style.animationDelay=Math.random()*8+"s";
+
+document.body.appendChild(b);
+
+}
+
+</script>
+
+</body>
+</html>

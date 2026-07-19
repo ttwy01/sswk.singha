@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+overflow:hidden;
+
+}
+
+/* ข้อความ */
+
+.title{
+
+margin-bottom:30px;
+
+text-align:center;
+
+color:#6b8ca8;
+
+}
+
+/* พื้นที่ */
+
+.scene{
+
+position:relative;
+
+width:450px;
+height:350px;
+
+}
+
+/* จดหมาย */
+
+.letter{
+
+position:absolute;
+
+left:50%;
+top:20px;
+
+transform:translateX(-50%);
+
+width:320px;
+height:200px;
+
+background:white;
+
+border-radius:12px;
+
+padding:25px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+transition:2s ease;
+
+z-index:1;
+
+}
+
+.letter h2{
+
+color:#7aa1ba;
+
+margin-bottom:10px;
+
+}
+
+.letter p{
+
+color:#777;
+
+line-height:1.8;
+
+}
+
+/* ซอง */
+
+.envelope{
+
+position:absolute;
+
+bottom:0;
+left:50%;
+
+transform:translateX(-50%);
+
+width:380px;
+height:220px;
+
+z-index:5;
+
+}
+
+/* ด้านล่าง */
+
+.bottom{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:#f8fcff;
+
+clip-path:polygon(0 100%,50% 45%,100% 100%);
+
+}
+
+/* ซ้าย */
+
+.left{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:#eef7ff;
+
+clip-path:polygon(0 0,50% 52%,0 100%);
+
+}
+
+/* ขวา */
+
+.right{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:#f2f8ff;
+
+clip-path:polygon(100% 0,50% 52%,100% 100%);
+
+}
+
+/* ฝาซอง */
+
+.flap{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:white;
+
+clip-path:polygon(0 0,50% 52%,100% 0);
+
+transform-origin:top;
+
+transition:1s;
+
+z-index:10;
+
+}
+
+/* ปุ่ม */
+
+button{
+
+margin-top:25px;
+
+padding:12px 30px;
+
+border:none;
+
+border-radius:30px;
+
+background:#8fd3ff;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ข้อความหลังเก็บ */
+
+.message{
+
+margin-top:25px;
+
+font-size:24px;
+
+color:#6b8ca8;
+
+opacity:0;
+
+transition:1s;
+
+}
+
+.show{
+
+opacity:1;
+
+}
+
+.next{
+
+display:none;
+
+margin-top:15px;
+
+background:#ff9fc9;
+
+}
+
+/* ตอนเก็บ */
+
+.store .letter{
+
+top:145px;
+
+transform:translateX(-50%) scale(.85);
+
+}
+
+.store .flap{
+
+transform:rotateX(180deg);
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">
+<h1>Suk san wan koet.</h1>
+</div>
+
+<div class="scene" id="scene">
+
+<div class="letter">
+
+<h2>24/08/08</h2>
+
+<p>
+ขอบคุณที่เข้ามาอ่านจดหมายฉบับนี้.
+</p>
+
+</div>
+
+<div class="envelope">
+
+<div class="bottom"></div>
+<div class="left"></div>
+<div class="right"></div>
+<div class="flap"></div>
+
+</div>
+
+</div>
+
+<button onclick="storeLetter()">
+เก็บจดหมายลงซอง 💌
+</button>
+
+<div class="message" id="message">
+ความทรงจำถูกเก็บไว้ในใจเป็นที่เรียบร้อย
+</div>
+
+<button class="next" id="nextBtn"
+</button>
+
+<script>
+
+function storeLetter(){
+
+document.getElementById("scene")
+.classList.add("store");
+
+setTimeout(()=>{
+
+document.getElementById("message")
+.classList.add("show");
+
+document.getElementById("nextBtn")
+.style.display="inline-block";
+
+},1800);
+
+}
+
+</script>
+
+</body>
+</html>

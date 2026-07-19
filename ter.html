@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sswk.myluv</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+.clovers{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:2;
+}
+.clovers span{
+    position:absolute;
+    top:-80px;
+    color:#8BC34A;
+    font-size:22px;
+    text-shadow:0 0 8px rgba(139,195,74,.4);
+    animation:cloverFall 8s linear infinite;
+    user-select:none;
+}
+
+@keyframes cloverFall{
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        transform:translateY(50vh) translateX(20px) rotate(180deg);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-25px) rotate(360deg);
+        opacity:0;
+    }
+}
+.clovers span:nth-child(1){left:6%; animation-delay:0s;}
+.clovers span:nth-child(2){left:18%; animation-delay:2s;}
+.clovers span:nth-child(3){left:35%; animation-delay:4s;}
+.clovers span:nth-child(4){left:52%; animation-delay:1s;}
+.clovers span:nth-child(5){left:70%; animation-delay:5s;}
+.clovers span:nth-child(6){left:88%; animation-delay:3s;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(180deg,#ffffff,#eef8ff);
+
+}
+
+.paper{
+
+width:650px;
+
+padding:40px;
+
+background:white;
+
+border-radius:18px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+text-align:center;
+
+position:relative;
+
+}
+
+.paper::before{
+
+content:"";
+
+position:absolute;
+
+left:35px;
+
+top:0;
+
+width:2px;
+
+height:100%;
+
+background:#dceeff;
+
+}
+
+h1{
+
+color:#6b8ca8;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+color:#888;
+
+margin-bottom:25px;
+
+}
+
+.camera{
+
+font-size:90px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.camera:hover{
+
+transform:scale(1.08);
+
+}
+
+.gallery{
+
+display:none;
+
+margin-top:30px;
+
+animation:fade .5s;
+
+}
+
+.gallery img{
+
+width:330px;
+
+height:240px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+}
+
+.caption{
+
+margin-top:15px;
+
+font-size:18px;
+
+color:#666;
+
+line-height:1.8;
+
+min-height:60px;
+
+}
+
+.count{
+
+margin:12px;
+
+color:#999;
+
+}
+
+.controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+button{
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:30px;
+
+background:#8fd3ff;
+
+color:white;
+
+cursor:pointer;
+
+font-size:17px;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+#nextPage{
+
+display:none;
+
+margin-top:25px;
+
+background:#ff9fc9;
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="paper">
+    <audio id="bgMusic" loop>
+    <source src="fan.mp3" type="audio/mpeg">
+</audio>
+
+<h1>จดหมายฉบับที่ 2</h1>
+
+<p class="subtitle">
+พัฒนาการของเด็กชายสิงหา
+</p>
+
+<div class="camera" onclick="openGallery()">
+📷
+</div>
+
+<div class="gallery" id="gallery">
+
+<img id="photo">
+
+<div class="caption" id="caption"></div>
+
+<div class="count" id="count"></div>
+
+<div class="controls">
+
+<button onclick="prevPhoto()">
+⬅
+</button>
+
+<button onclick="nextPhoto()">
+➡
+</button>
+
+</div>
+
+<button id="nextPage"
+onclick="window.location.href='love.html'">
+
+จดหมายฉบับถัดไป 💌
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+// =======================
+// เพิ่มรูปตรงนี้
+// =======================
+
+const photos = [
+
+{
+image:"1.jpg",
+text:"เด็กชายสิงหาหิวนมครับ"
+},
+
+{
+image:"2.jpg",
+text:"เด็กชายสิงหามาครับ"
+},
+
+{
+image:"3.jpg",
+text:"เด็กชายสิงหาพร้อมซิ่งครับ"
+},
+
+{
+image:"4.jpg",
+text:"เด็กชายสิงหาร่างโตครับ"
+},
+
+{
+image:"5.jpg",
+text:"รูปคู่เด็กชายสิงหาครับ"
+},
+
+{
+image:"6.jpg",
+text:"เด็กชายสิงหา แว่นมานี่มาครับ"
+},
+
+{
+image:"7.jpg",
+text:"เด็กชายสิงหาแก้มน่าหยิกครับ"
+},
+
+{
+image:"8.jpg",
+text:"เด็กชายสิงหามีหน้าม้าครับ"
+},
+
+{
+image:"9.jpg",
+text:"เด็กชายสิงหายื่นแก้มมาครับ"
+}
+
+];
+
+// =======================
+
+let index=0;
+
+function openGallery(){
+
+document.getElementById("gallery").style.display="block";
+
+showPhoto();
+
+// เล่นเพลง
+const music = document.getElementById("bgMusic");
+music.play();
+
+}
+
+function showPhoto(){
+
+document.getElementById("photo").src=photos[index].image;
+
+document.getElementById("caption").innerHTML=photos[index].text;
+
+document.getElementById("count").innerHTML=(index+1)+" / "+photos.length;
+
+if(index===photos.length-1){
+
+document.getElementById("nextPage").style.display="inline-block";
+
+}else{
+
+document.getElementById("nextPage").style.display="none";
+
+}
+
+}
+
+function nextPhoto(){
+
+if(index<photos.length-1){
+
+index++;
+
+showPhoto();
+
+}
+
+}
+
+function prevPhoto(){
+
+if(index>0){
+
+index--;
+
+showPhoto();
+
+}
+
+}
+
+const music = document.getElementById("bgMusic");
+
+const startTime = 23; // วินาทีที่เริ่ม
+const endTime = 189;   // วินาทีที่จบท่อน
+
+function openGallery() {
+    document.getElementById("gallery").style.display = "block";
+    showPhoto();
+
+    music.currentTime = startTime;
+    music.play();
+}
+
+music.addEventListener("timeupdate", function () {
+    if (music.currentTime >= endTime) {
+        music.currentTime = startTime;
+        music.play();
+    }
+});
+function createLetter(){
+    const letter = document.createElement("div");
+    letter.className = "bow"; // ใช้ CSS เดิมได้
+
+    const letters = ["🍀"];
+    letter.innerHTML = letters[Math.floor(Math.random() * letters.length)];
+
+    letter.style.left = Math.random() * window.innerWidth + "px";
+    letter.style.fontSize = (28 + Math.random() * 18) + "px";
+    letter.style.animationDuration = (6 + Math.random() * 4) + "s";
+
+    document.getElementById("bows").appendChild(letter);
+
+    setTimeout(() => {
+        letter.remove();
+    }, 10000);
+}
+
+setInterval(createLetter, 500);
+</script>
+<div class="clovers">
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+    <span>🍀</span>
+</body>
+</html>
